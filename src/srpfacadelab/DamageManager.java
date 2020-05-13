@@ -1,9 +1,16 @@
 package srpfacadelab;
 
 public class DamageManager {
+
+    private IGameEngine gameEngine;
+
+    public DamageManager(IGameEngine gameEngine) {
+        this.gameEngine = gameEngine;
+    }
+
     public void takeDamage(RpgPlayer rpgPlayer, int damage) {
-    if (damage < rpgPlayer.getArmour()) {
-            rpgPlayer.getGameEngine().playSpecialEffect("parry");
+        if (damage < rpgPlayer.getArmour()) {
+            gameEngine.playSpecialEffect("parry");
         }
 
         int damageToDeal = damage - rpgPlayer.getArmour();
@@ -12,8 +19,8 @@ public class DamageManager {
         }
 
         int newHealth = rpgPlayer.getHealth();
-        rpgPlayer.setHealth( newHealth - damageToDeal);
+        rpgPlayer.setHealth(newHealth - damageToDeal);
 
-        rpgPlayer.getGameEngine().playSpecialEffect("lots_of_gore");
+        gameEngine.playSpecialEffect("lots_of_gore");
     }
 }
